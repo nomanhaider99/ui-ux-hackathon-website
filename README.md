@@ -1,36 +1,38 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# UI/UX Hackathon Project: Figma Design to Next.js Website
 
-## Getting Started
+This project was created as part of a UI/UX Hackathon, where we transformed a provided Figma design into a fully functional and responsive website using **Next.js** and **Tailwind CSS**. The goal was to achieve pixel-perfect design fidelity while ensuring a seamless user experience.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🚀 Project Overview
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+This project demonstrates:
+- **Responsive Design**: Built to adapt perfectly to all screen sizes.
+- **Modern Tech Stack**: Utilized Next.js for a powerful, server-rendered website and Tailwind CSS for rapid UI development.
+- **Optimized Performance**: Focused on fast load times and smooth interactions.
+- **UI/UX Excellence**: Captured every design detail from the Figma file to deliver a polished user interface.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🛠️ Technologies Used
 
-## Learn More
+- **Next.js**: A React framework for server-rendered apps.
+- **Tailwind CSS**: A utility-first CSS framework for rapid styling.
+- **Figma**: As the source of the design.
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📂 Features
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. **Pixel-Perfect Implementation**: Recreated the exact look and feel of the Figma design.
+2. **Responsive UI**: The layout adjusts seamlessly for desktops, tablets, and mobile devices.
+3. **Custom Components**: Reusable and scalable components designed with Tailwind CSS.
+4. **Performance Optimization**: Lightweight and efficient code for faster loading.
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🔧 Setup and Installation
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/your-repo-name.git
