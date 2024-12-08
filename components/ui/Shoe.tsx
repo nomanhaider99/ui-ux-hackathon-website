@@ -15,14 +15,14 @@ const Shoe: React.FC<ShoeProps> = ({
     title
 }) => {
     return (
-        <div className='flex flex-col gap-2 md:w-[441.36px] h-[510.36px]'>
+        <div className='flex flex-col gap-2 md:w-[400.36px] h-[510.36px]'>
             {/* Image */}
             <div className=''>
                 <Image
                     alt=''
                     src={image}
-                    width={441.36}
-                    height={441.36}
+                    width={400.36}
+                    height={400.36}
                     className='w-[441.36px] h-[441.36px]'
                 />
             </div>
