@@ -1,3 +1,4 @@
+import { auth } from "@/auth";
 import Hello from "@/components/ui/Hello";
 import Hero from "@/components/ui/Hero";
 import Text from "@/components/ui/Text";
@@ -8,7 +9,7 @@ import Featured from "@/components/widgets/Featured";
 import Gear from "@/components/widgets/Gear";
 import Links from "@/components/widgets/Links";
 
-export default function Home() {
+export default async function Home() {
   return (
     <>
       <Hello />

@@ -1,6 +1,8 @@
+'use client'
+
+import { deleteCart } from '@/app/actions/deleteCart';
 import Image from 'next/image';
 import React from 'react';
-import { CiHeart } from 'react-icons/ci';
 import { MdDeleteOutline } from 'react-icons/md';
 
 interface CartItemProps {
@@ -40,16 +42,14 @@ const CartItem: React.FC<CartItemProps> = ({
                     <div className="text-[15px] font-medium">{title}</div>
                     <div className="text-textgray text-[15px]">{category}</div>
 
-                    {/* Size and Quantity */}
-                    <div className="flex items-center gap-6 text-[15px] text-textgray">
-                        <div>Size {size}</div>
-                        <div>Quantity {quantity}</div>
-                    </div>
-
                     {/* Actions */}
                     <div className="flex items-center gap-3 mt-2">
-                        <CiHeart size={24} color="#000" />
-                        <MdDeleteOutline size={24} color="#000" />
+                        <MdDeleteOutline
+                            size={24}
+                            color="#000"
+                            className='cursor-pointer'
+                            onClick={() => deleteCart(title)}
+                        />
                     </div>
                 </div>
 

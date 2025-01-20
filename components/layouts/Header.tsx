@@ -1,12 +1,14 @@
 'use client'
+
 import React, { useState } from 'react';
 import Logo from '../ui/Logo';
 import Link from 'next/link';
 import Input from '../ui/Input';
 import { IoBagOutline } from 'react-icons/io5';
 import { CiHeart } from 'react-icons/ci';
-import { FiMenu } from 'react-icons/fi';
+import { FiLogOut, FiMenu } from 'react-icons/fi';
 import { IoClose } from 'react-icons/io5';
+import { signOut } from 'next-auth/react';
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -25,9 +27,6 @@ const Header = () => {
         <Link href={"/"}><div>Home</div></Link>
         <Link href={"/products"}><div>New & Featured</div></Link>
         <Link href={"/contact"}><div>Contact Us</div></Link>
-        <Link href={"/checkout"}><div>Checkout</div></Link>
-        <div>Sale</div>
-        <div>SNKRS</div>
       </div>
 
       {/* Search Bar & Buttons */}
@@ -44,6 +43,9 @@ const Header = () => {
             <IoBagOutline size={25} color="#000" />
           </div>
         </Link>
+        <div>
+          <FiLogOut size={28} color='#000' className='cursor-pointer' onClick={async() => await signOut()} />
+        </div>
         {/* Hamburger Menu Button */}
         <button 
           className="md:hidden block text-xl"

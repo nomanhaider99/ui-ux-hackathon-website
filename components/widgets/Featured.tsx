@@ -13,7 +13,7 @@ const Featured = () => {
                 src={FeaturedImage}
                 width={1344}
                 height={700}
-                className='h-[700px] w-[1344px]'
+                className='md:h-[700px] md:w-[1344px]'
              />
         </div>
         <div className='py-5 flex flex-col gap-6 items-center'>
