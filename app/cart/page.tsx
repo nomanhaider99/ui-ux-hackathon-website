@@ -1,12 +1,10 @@
-import Cart from '@/components/widgets/Cart'
-import Might from '@/components/widgets/Might'
+import CartWrapper from '@/components/widgets/CartWrapper'
 import React from 'react'
 
 const page = () => {
   return (
     <>
-      <Cart />
-      <Might />
+      <CartWrapper />
     </>
   )
 }

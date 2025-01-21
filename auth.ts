@@ -36,7 +36,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             throw new Error("Invalid credentials!");
           }
 
-          return user; // Return the user object, including the ID
+          return user; 
         } catch (error) {
           console.error("Authentication error:", error);
           throw new Error("An error occurred during login");
@@ -45,26 +45,10 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     }),
   ],
   session: {
-    strategy: "jwt", // Use JWT strategy for session handling
+    strategy: "jwt", 
   },
   pages: {
-    signIn: "/login", // Redirect here for login
+    signIn: "/login",
   },
-  secret: process.env.NEXTAUTH_SECRET, // Replace with your actual secret
-  callbacks: {
-    async jwt({ token, user }) {
-      if (user) {
-        // Include user ID and other properties in the JWT
-        token.id = user._id; // `_id` comes from Sanity
-      }
-      return token;
-    },
-    async session({ session, token }) {
-      if (token) {
-        // Include the user ID in the session object
-        session.user.id = token.id as string;
-      }
-      return session;
-    },
-  },
+  secret: process.env.NEXTAUTH_SECRET, 
 });

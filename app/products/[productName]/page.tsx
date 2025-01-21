@@ -20,7 +20,7 @@ const ProductPage = async ({ params }: { params: { productName: string } }) => {
             <Detail
                 title={data.productName}
                 description={data.description}
-                image={data.imageUrl}
+                image={data.imageUrl as any}
                 price={data.price}
                 inventory={data.inventory}
                 colors={data.colors}

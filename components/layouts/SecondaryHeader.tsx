@@ -1,40 +1,61 @@
-import Image from 'next/image'
-import React from 'react'
-import Jordan from '@/public/images/Jordan.png'
-import Link from 'next/link'
-import { auth } from '@/auth'
+'use client'
 
-const SecondaryHeader = async () => {
-  const session = await auth();
-  const user = await session?.user;  
+import Image from 'next/image';
+import React, { useEffect, useState } from 'react';
+import Jordan from '@/public/images/Jordan.png';
+import Link from 'next/link';
+import { User } from 'next-auth';
+import { getSession } from 'next-auth/react';
+
+const SecondaryHeader = () => {
+  const [user, setUser] = useState<null | User>(null);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const session = await getSession();
+      setUser(session?.user || null);
+    };
+
+    fetchUser();
+  }, []);
+
   return (
-    <div className='w-full h-[36px] flex justify-between items-center bg-lightgray md:px-10 px-4'>
+    <div className="w-full h-[36px] flex justify-between items-center bg-lightgray md:px-10 px-4">
       <div>
         <Image
-          alt=''
+          alt=""
           src={Jordan}
           width={24}
           height={24}
-          className='h-[24px] w-[24px]'
+          className="h-[24px] w-[24px]"
         />
       </div>
-      <div className='flex items-center gap-2 text-[12px] font-normal'>
+      <div className="flex items-center gap-2 text-[12px] font-normal">
         <div>Find a Store</div>
         <div>|</div>
-        <Link href={"/contact"}><div>Help</div></Link>
-        {
-          !user ? (
-            <>
-              <div>|</div>
-              <Link href={"/register"}><div>Join Us</div></Link>
-              <div>|</div>
-              <Link href={"/login"}><div>Sign In</div></Link>
-            </>
-          ) : ''
-            }
+        <Link href="/contact">
+          <div>Help</div>
+        </Link>
+        {!user ? (
+          <>
+            <div>|</div>
+            <Link href="/register">
+              <div>Join Us</div>
+            </Link>
+            <div>|</div>
+            <Link href="/login">
+              <div>Sign In</div>
+            </Link>
+          </>
+        ) : (
+          <>
+          <div>|</div>
+          <div>Welcome, {user.name}</div>
+          </>
+        )}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default SecondaryHeader
+export default SecondaryHeader;
