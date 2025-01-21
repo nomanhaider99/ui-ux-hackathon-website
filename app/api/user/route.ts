@@ -6,6 +6,6 @@ export async function GET(request: Request) {
         const session = await auth();
         return NextResponse.json({ user: session?.user || null });
     } catch (error: any) {
-        NextResponse.json(error);
+        return NextResponse.json({ error: error.message || 'An error occurred' }, { status: 500 });
     }
 }
