@@ -31,7 +31,7 @@ const CartItem: React.FC<CartItemProps> = ({
                     src={image}
                     width={150}
                     height={150}
-                    className="w-[150px] h-[150px] object-cover"
+                    className="w-[200px] h-[150px]"
                 />
             </div>
 

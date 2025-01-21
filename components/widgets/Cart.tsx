@@ -14,11 +14,12 @@ const Cart = () => {
   const [loading, setLoading] = useState(true);
   const [userId, setUserId] = useState<string | null | undefined>(null);
 
+  console.log("UserID: ",userId)
   useEffect(() => {
     const fetchData = async () => {
-      const session = await auth();
-      const userId = session?.user?.name;
-      setUserId(userId);
+      const response = await fetch('/api/user');
+      const data = await response.json();
+      setUserId(data.user.name);
 
       if (!userId) {
         setLoading(false);
@@ -48,7 +49,7 @@ const Cart = () => {
     };
 
     fetchData();
-  }, []);
+  }, [ userId ]);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -64,15 +65,11 @@ const Cart = () => {
         <div className="md:w-[70%] w-full flex flex-col gap-4">
           <div className="md:w-[717.33px] w-full p-2 bg-lightgray flex flex-col gap-2">
             <div className="text-[13px] leading-[14px] font-medium">Free Delivery</div>
-            <div className="flex items-center gap-3 text-[11px]">
-              <div>Applies to orders of ₹ 14 000.00 or more.</div>
-              <div className="underline font-medium cursor-pointer">View details</div>
-            </div>
           </div>
           <div className="flex flex-col gap-2">
             <div className="text-[22px] leading-[33px] font-medium">Bag</div>
             <div className="flex flex-col gap-2">
-              {data.map((item, index) => (
+              {data.length > 0 ? data.map((item, index) => (
                 <CartItem
                   category={item.category}
                   image=""
@@ -82,12 +79,8 @@ const Cart = () => {
                   title={item.productName}
                   key={index}
                 />
-              ))}
+              )) : <div>No, Items found in cart</div>}
             </div>
-          </div>
-          <div className="flex flex-col gap-2">
-            <div className="text-[21px] font-medium">Favourites</div>
-            <div className="text-[15px]">There are no items saved to your favourites.</div>
           </div>
         </div>
         <div className="md:w-[30%] w-full flex flex-col gap-8">
