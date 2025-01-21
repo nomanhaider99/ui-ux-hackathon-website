@@ -19,7 +19,7 @@ const Cart = () => {
     const fetchData = async () => {
       const response = await fetch('/api/user');
       const data = await response.json();
-      setUserId(data.user.name);
+      setUserId(data.user?.name || null);
 
       if (!userId) {
         setLoading(false);
@@ -49,14 +49,14 @@ const Cart = () => {
     };
 
     fetchData();
-  }, [ userId ]);
+  }, [ userId, setData ]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div className='px-10'>Loading...</div>;
   }
 
   if (!userId) {
-    return <div>User not authenticated</div>;
+    return <div className='px-10'>User not authenticated</div>;
   }
 
   return (

@@ -19,14 +19,20 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={``}
+        className={`w-full`}
       >
         <Toaster />
-        <SecondaryHeader />
-        <Header />
-        {children}
-        <Footer />
-        <SecondaryFooter />
+        <div className="w-full min-h-screen flex flex-col justify-between">
+          <div>
+            <SecondaryHeader />
+            <Header />
+          </div>
+          <div>{children}</div>
+          <div>
+            <Footer />
+            <SecondaryFooter />
+          </div>
+        </div>
       </body>
     </html>
   );

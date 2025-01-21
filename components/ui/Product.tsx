@@ -8,6 +8,7 @@ import { addToCart } from '@/app/actions/addToCart';
 import { getSession } from 'next-auth/react';
 import Link from 'next/link';
 import toast from 'react-hot-toast';
+import { useRouter } from 'next/navigation';
 
 interface ShoeProps {
     image: string;
@@ -20,25 +21,28 @@ interface ShoeProps {
 
 const Product: React.FC<ShoeProps> = ({ category, image, price, title, id, status }) => {
     const { handleSubmit } = useForm();
+    const router = useRouter();
 
     const submitAddToCart = async () => {
         try {
             const session = await getSession();
 
             if (!session?.user?.name) {
-                alert("User Not Found!")
+                toast.error('User Not Found');
+                router.push('/login')
+            } else {
+                const data = {
+                    userId: session?.user?.name,
+                    productId: id,
+                    productName: title,
+                    price: price,
+                    category: category,
+                    imageUrl: image,
+                };
+                await addToCart(data);
+                toast.success('Product Added Into Cart!');
+                router.push('/cart');
             }
-
-            const data = {
-                userId: session?.user?.name,
-                productId: id,
-                productName: title,
-                price: price,
-                category: category,
-                imageUrl: image,
-            };
-            await addToCart(data);
-            toast.success('Product Added Into Cart!');
         } catch (error) {
             toast.error('Failed To Add Product Into Cart!');
             console.error('Error adding to cart:', error);
