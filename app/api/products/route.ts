@@ -1,4 +1,5 @@
 import { client } from "@/sanity/lib/client";
+import { NextResponse } from "next/server";
 
 export async function GET(request: Request) {
     try {
@@ -18,7 +19,7 @@ export async function GET(request: Request) {
 
         const data = await client.fetch(query);
 
-        return data;
+        return NextResponse.json(data);
 
     } catch (error) {
         throw new Error(error as any);
