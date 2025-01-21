@@ -6,6 +6,7 @@ import Button from '../ui/Button'
 import Link from 'next/link'
 import { FieldValues, useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
+import { useRouter } from 'next/navigation'
 
 const Register = () => {
     const {
@@ -18,6 +19,7 @@ const Register = () => {
             password: ''
         }
     });
+    const router = useRouter();
 
     const submitRegisterForm = async (data: FieldValues) => {
         try {
@@ -36,6 +38,7 @@ const Register = () => {
             }
 
             toast.success('User Created Successfully!');
+            router.push('/login');
 
             console.log('User Created!');
         } catch (err) {

@@ -1,10 +1,10 @@
-import CartWrapper from '@/components/widgets/CartWrapper'
+import Cart from '@/components/widgets/Cart'
 import React from 'react'
 
 const page = () => {
   return (
     <>
-      <CartWrapper />
+      <Cart />
     </>
   )
 }

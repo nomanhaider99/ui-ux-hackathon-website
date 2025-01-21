@@ -1,4 +1,6 @@
-import React from 'react';
+'use client'
+
+import React, { useEffect, useState } from 'react';
 import Button from '../ui/Button';
 import CartItem from '../ui/CartItem';
 import { client } from '@/sanity/lib/client';
@@ -6,29 +8,55 @@ import { auth } from '@/auth';
 import { OrderType } from '@/types/order';
 import Link from 'next/link';
 
-const Cart = async () => {
-  const session = await auth();
-  const userId = session?.user?.name;
+const Cart = () => {
+  const [data, setData] = useState<OrderType[]>([]);
+  const [subtotal, setSubtotal] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const [userId, setUserId] = useState<string | null | undefined>(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const session = await auth();
+      const userId = session?.user?.name;
+      setUserId(userId);
+
+      if (!userId) {
+        setLoading(false);
+        return;
+      }
+
+      const query = `*[_type == "order" && userId == $userId] {
+        _id,
+        productId,
+        productName,
+        price,
+        category,
+        imageUrl{
+          asset {
+            url
+          }
+        }
+      }`;
+
+      const orders: OrderType[] = await client.fetch(query, { userId });
+      setData(orders);
+
+      const calculatedSubtotal = orders.reduce((acc, item) => acc + item.price, 0);
+      setSubtotal(calculatedSubtotal);
+
+      setLoading(false);
+    };
+
+    fetchData();
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   if (!userId) {
     return <div>User not authenticated</div>;
   }
-
-  const query = `*[_type == "order" && userId == $userId] {
-    _id,
-    productId,
-    productName,
-    price,
-    category,
-    imageUrl{
-      asset {
-        url
-      }
-    }
-  }`;
-
-  const data: OrderType[] = await client.fetch(query, { userId });
-  const subtotal = data.reduce((acc, item) => acc + item.price, 0);
 
   return (
     <div className="w-full md:px-10 px-4 py-10 flex justify-center items-center">

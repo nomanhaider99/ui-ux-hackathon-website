@@ -5,15 +5,15 @@ import React, { useEffect, useState } from 'react';
 import Jordan from '@/public/images/Jordan.png';
 import Link from 'next/link';
 import { User } from 'next-auth';
-import { auth } from '@/auth';
 
 const SecondaryHeader = () => {
-  const [user, setUser] = useState<null | User>(null);
+  const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
     const fetchUser = async () => {
-      const session = await auth();
-      setUser(session?.user || null);
+      const response = await fetch('/api/user');
+      const data = await response.json();
+      setUser(data.user);
     };
 
     fetchUser();
@@ -49,8 +49,8 @@ const SecondaryHeader = () => {
           </>
         ) : (
           <>
-          <div>|</div>
-          <div>Welcome, {user.name}</div>
+            <div>|</div>
+            <div>Welcome, {user.name}</div>
           </>
         )}
       </div>

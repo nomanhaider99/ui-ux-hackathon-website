@@ -1,6 +1,6 @@
-'use client'
+'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Logo from '../ui/Logo';
 import Link from 'next/link';
 import Input from '../ui/Input';
@@ -8,12 +8,23 @@ import { IoBagOutline } from 'react-icons/io5';
 import { CiHeart } from 'react-icons/ci';
 import { FiLogOut, FiMenu } from 'react-icons/fi';
 import { IoClose } from 'react-icons/io5';
-import { signOut } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
+import { User } from 'next-auth';
 
 const Header = () => {
+  const [user, setUser] = useState<User | null>();
   const [menuOpen, setMenuOpen] = useState(false);
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch('/api/user');
+      const data = await response.json();
+      setUser(data.user);
+    }
+    fetchData();
+  }, []);
 
   return (
     <div className="w-full h-[60px] flex justify-between items-center md:px-10 px-4">
@@ -43,11 +54,21 @@ const Header = () => {
             <IoBagOutline size={25} color="#000" />
           </div>
         </Link>
-        <div>
-          <FiLogOut size={28} color='#000' className='cursor-pointer' onClick={async() => await signOut()} />
-        </div>
+
+        {/* Render Logout only if user is authenticated */}
+        {user && (
+          <div>
+            <FiLogOut
+              size={28}
+              color="#000"
+              className="cursor-pointer"
+              onClick={async () => await signOut()}
+            />
+          </div>
+        )}
+
         {/* Hamburger Menu Button */}
-        <button 
+        <button
           className="md:hidden block text-xl"
           onClick={toggleMenu}
         >
@@ -57,9 +78,8 @@ const Header = () => {
 
       {/* Mobile Menu Drawer */}
       <div
-        className={`fixed top-0 w-[250px] right-0 h-full bg-white shadow-lg z-50 p-5 transform ${
-          menuOpen ? "translate-x-0" : "translate-x-full"
-        } transition-transform duration-300`}
+        className={`fixed top-0 w-[250px] right-0 h-full bg-white shadow-lg z-50 p-5 transform ${menuOpen ? "translate-x-0" : "translate-x-full"
+          } transition-transform duration-300`}
       >
         {/* Close Button */}
         <button
