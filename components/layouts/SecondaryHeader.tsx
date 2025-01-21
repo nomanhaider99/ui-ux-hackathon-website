@@ -5,14 +5,14 @@ import React, { useEffect, useState } from 'react';
 import Jordan from '@/public/images/Jordan.png';
 import Link from 'next/link';
 import { User } from 'next-auth';
-import { getSession } from 'next-auth/react';
+import { auth } from '@/auth';
 
 const SecondaryHeader = () => {
   const [user, setUser] = useState<null | User>(null);
 
   useEffect(() => {
     const fetchUser = async () => {
-      const session = await getSession();
+      const session = await auth();
       setUser(session?.user || null);
     };
 

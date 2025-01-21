@@ -35,7 +35,7 @@ const Gear = () => {
       <div className="text-[23px] leading-[28px] font-medium">Just In Products</div>
       <div className="flex flex-col gap-1">
         <div className="flex flex-col items-center">
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {products.map((item, index) => (
               <Product
                 category={item.category}

@@ -22,6 +22,9 @@ export async function GET(request: Request) {
         return NextResponse.json(data);
 
     } catch (error) {
-        throw new Error(error as any);
+        return NextResponse.json(
+            { error: "Failed to fetch products. Please try again later." },
+            { status: 500 }
+        );
     }
 }
